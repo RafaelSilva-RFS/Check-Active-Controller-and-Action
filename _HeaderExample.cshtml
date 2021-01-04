@@ -1,0 +1,30 @@
+﻿@functions{
+    // Check if Controller is active
+    string isActive(string controller)
+    {
+        var active = ViewContext.RouteData.Values["Controller"].ToString() == controller ? "active" : "";
+        return active;
+    }    
+    // Check if Controller and Action is active
+    string isActive(string controller, string action)
+    {
+        var active = "";
+        if (ViewContext.RouteData.Values["Controller"].ToString() == controller && ViewContext.RouteData.Values["Action"].ToString() == action)
+        {
+            return active = "active";
+        }
+        return active;
+    }
+}
+
+@* Check Controller Example *@
+<li class="@isActive("Controller")">
+    <a href="@Url.Action("Action", "Controller", new { id = "123" })">
+        Link
+    </a>
+</li>
+
+@* Check Controller and Action Example *@
+<li class="nav-item @isActive("Controller", "Action")">
+    @Html.ActionLink("Link", "Action", "Controller", new { id = "123" }, null)
+</li>
